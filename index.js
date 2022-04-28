@@ -14,7 +14,8 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-
+console.log(uri);
+console.log("start out of the routes");
 async function run() {
   try {
     await client.connect();
@@ -32,10 +33,8 @@ async function run() {
 
     app.post("/addproducts", async (req, res) => {
       const body = req.body;
-      console.log(body);
       const insertAPd = body;
       const result = await productCollection.insertOne(insertAPd);
-      console.log("successfully Added");
       res.send(result);
     });
 
@@ -49,8 +48,6 @@ async function run() {
     app.put("/products/:updateId", async (req, res) => {
       const id = req.params.updateId;
       const body = req.body;
-      console.log(body);
-      console.log(id);
       const filter = { _id: ObjectId(id) };
       const updateDoc = {
         $set: {
@@ -63,7 +60,6 @@ async function run() {
 
     app.post("/addorder", async (req, res) => {
       const body = req.body;
-      console.log(body);
       const doc = {
         ...body,
       };
@@ -80,7 +76,8 @@ async function run() {
   } finally {
   }
 }
-run().catch(console.dir());
+run().catch(console.dir);
+console.log("end out of the routes");
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
