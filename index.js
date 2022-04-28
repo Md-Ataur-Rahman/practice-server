@@ -28,6 +28,7 @@ async function run() {
       const query = req.query;
       const cursor = productCollection.find(query);
       const result = await cursor.toArray();
+      console.log("yes");
       res.send(result);
     });
 
